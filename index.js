@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
 
-
-function submitform(event){
+function submitform(event) {
     event.preventDefault();
     let username = document.getElementById("username").value;
     let phonenumber = document.getElementById("phonenumber").value;
@@ -25,16 +24,63 @@ function submitform(event){
     let selectevent = document.getElementById("selectevent").value;
     let date = document.getElementById("date1").value;
 
-    var details=`Username : ${username} \n Phone number : ${phonenumber} \n Email : ${email} \n Select Event : ${selectevent} \n Date : ${date}`;
 
-    if(!email || !phonenumber || !username || !selectevent || !date){
+    if (username.trim() === "") {
+        alert("Please enter your name");
+        return;
+    } else if (!isValidusername(username)) {
+        alert("Please enter a valid Username");
+        return;
+    }
+
+
+    if (phonenumber.trim() === "") {
+        alert("Please enter your contact number");
+        return;
+    } else if (!isValidContact(phonenumber)) {
+        alert("Please enter a valid 10-digit contact number");
+        return;
+    }
+
+
+    if (email.trim() === "") {
+        alert("Please enter your email address");
+        return;
+    }
+
+    if (!selectevent || !date) {
         alert("Enter required fields")
+        return
     }
-    else{
-        alert(details);
-    }
-    document.getElementById("loginform").reset();
+
+
+    var details = `Username : ${username} \n Phone number : ${phonenumber} \n Email : ${email} \n Select Event : ${selectevent} \n Date : ${date}`;
+    alert(details)
+    document.getElementById('loginform').reset();
+
 }
+
+
+function isValidusername(username) {
+    var userRegex = /^[a-zA-Z]{3,15}$/;
+    return userRegex.test(username);
+}
+function isValidContact(phonenumber) {
+    var contactRegex = /^\d{10}$/;
+    return contactRegex.test(phonenumber);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
